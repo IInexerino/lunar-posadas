@@ -1,0 +1,4 @@
+# Lore
+You are trying to fight your way through the CIA-Nazi base on the back side of the moon in order to get a hold of comms that the Nazis have developed which allow them to send signals to aliens through a wormhole. The player is Juan Posadas obviously, the rest is self-explanatory
+# Gameplay
+I also find the pseudo-isometric style of enter the gungeon so much more fun to play than rogue legacy's, but I like the character progression and game progression much more, as in a way it is more open world, but the difficulty of certain enemies in the harder areas is higher for the low level character, and the bossrooms doors are locked until you kill the boss of the previous area
