@@ -66,13 +66,6 @@ fn setup(
     mut texture_atlases: ResMut<Assets<TextureAtlasLayout>>,
     mut images: ResMut<Assets<Image>>,
 ) {
-    commands.spawn((
-        Camera::default(),
-        Camera2d::default(),
-        Transform::from_xyz(0.0, 0.0, 1000.0),
-        GlobalTransform::default(),
-        Visibility::Visible,
-    ));
 
     let configs = [
         (
@@ -130,8 +123,8 @@ fn setup(
         );
     }
 
-    commands.insert_resource(registry);
 
+    
     let initial_config = configs[0].4;
     let initial_texture = asset_server.load("animations/player/posadas_idle_back1.png");
     let initial_layout = texture_atlases.add(TextureAtlasLayout::from_grid(
@@ -142,18 +135,22 @@ fn setup(
         None,
     ));
 
+    commands.insert_resource(registry);
+
     commands.spawn((
+        Camera2d::default(),
+        Transform::from_xyz(0.0, 0.0, 1000.0),
+    ));
+
+    commands.spawn((
+        Player {
+            last_action: LastAction::None,
+        },
         Sprite {
             image: initial_texture.clone(),
             custom_size: Some(initial_config),
             anchor: Anchor::Center,
             ..default()
-        },
-        Transform::from_xyz(0.0, 0.0, 0.0),
-        GlobalTransform::default(),
-        Visibility::Visible,
-        Player {
-            last_action: LastAction::None,
         },
         IdleState {
             current: IdleAnimation::FacingUp,
