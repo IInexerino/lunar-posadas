@@ -1,8 +1,9 @@
 use bevy::prelude::*;
 use bevy::sprite::Anchor;
+use bevy_enhanced_input::prelude::Actions;
 
-use crate::player::{Player, LastAction};
-use crate::animation::{CurrentAnimationState, AnimationPlayer, AtlasIndex, AnimationConfig};
+use crate::player::{Player, PlayerEntity};
+use crate::animation_config::{AnimationConfig, AnimationType};
 
 fn setup(
     mut commands: Commands,
@@ -16,7 +17,7 @@ fn setup(
     ));
 
     // Initial animation config for player
-    let initial_texture = asset_server.load("animations/player/posadas_idle_back1.png");
+    let initial_texture = asset_server.load("animations/player/posadas_idle_front.png");
     let initial_layout = texture_atlases.add(TextureAtlasLayout::from_grid(
         UVec2::new(200, 240),
         3,
@@ -28,32 +29,29 @@ fn setup(
 
     // Spawn player entity
     commands.spawn((
+        PlayerEntity {
+            direction: Vec2 { x: 0.0, y: -1.0 },
+            speed: 0.0,
+            current_animation: AnimationType::PlayerIdleForward,
+            animation_config: AnimationConfig {
+                layout_handle: initial_layout,
+                texture_handle: initial_texture.clone(),
+                frame_count: 3,
+                frame_time: 0.5,
+                size: initial_size,
+            },
+            animation_timer: 0.0,
+            current_animation_frame: 0,
+            atlas_index: 0,
+        },
         Sprite {
-            image: initial_texture.clone(),
+            image: initial_texture,
             custom_size: Some(initial_size),
             anchor: Anchor::Center,
             ..default()
         },
         Transform::from_xyz(0.0, 0.0, 0.0),
-        Player {
-            last_action: LastAction::None,
-        },
-        CurrentAnimationState {
-            current: crate::animation::IdleAnimation::Forward,
-        },
-        AnimationPlayer {
-            config: AnimationConfig {
-                layout_handle: initial_layout.clone(),
-                texture_handle: initial_texture,
-                frame_count: 3,
-                frame_time: 0.5,
-                size: initial_size,
-            },
-            current_frame: 0,
-            timer: 0.0,
-            flip_x: false,
-        },
-        AtlasIndex(0),
+        Actions::<Player>::default()
     ));
 }
 

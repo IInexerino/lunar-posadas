@@ -5,7 +5,7 @@ fn change_window_mode(
     keyboard: Res<ButtonInput<KeyCode>>,
     mut windows: Query<&mut Window>,
 ) {
-    let mut window = windows.single_mut();
+    let mut window = windows.single_mut().unwrap();
     if keyboard.just_pressed(KeyCode::F11) {
         window.mode = match window.mode {
             WindowMode::Windowed => WindowMode::BorderlessFullscreen(MonitorSelection::Current),

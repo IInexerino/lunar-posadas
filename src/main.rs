@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-mod animation;
+mod animation_config;
 mod window;
 mod player;
 mod setup;
@@ -21,7 +21,7 @@ fn main() {
         )
         .add_plugins(window::WindowPlugin)
         .add_plugins(player::PlayerPlugin)
-        .add_plugins(animation::AnimationPlugin)
+        .add_plugins(animation_config::AnimationPlugin)
         .add_plugins(setup::SetupPlugin)
         .run();
 }
