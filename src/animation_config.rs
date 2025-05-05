@@ -68,6 +68,22 @@ fn setup_animation_registry(
             Vec2::new(54.0, 69.0),
             0.5,
         ),
+        (
+            AnimationType::PlayerWalkForward,
+            "animations/player/posadas_walk_front.png",
+            UVec2::new(220, 250),
+            4,
+            Vec2::new(66.0, 75.0),
+            0.35,
+        ),
+        (
+            AnimationType::PlayerWalkRight,
+            "animations/player/posadas_walk_right.png",
+            UVec2::new(180, 270),
+            4,
+            Vec2::new(54.0, 81.0),
+            0.35,
+        ),
     ];
 
     let mut registry = AnimationRegistry {animations: HashMap::new(),};
